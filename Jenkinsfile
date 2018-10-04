@@ -14,7 +14,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
+            agent none
             steps {
                 sh """
                 docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD docker.h2o.ai
