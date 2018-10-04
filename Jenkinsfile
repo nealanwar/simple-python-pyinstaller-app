@@ -13,27 +13,28 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Set up Driverless AI image') {
             agent {
               docker {
-                image 'jpetazzo/dind'
+                image 'python:2-alpine'
               }
             }
             steps {
                 sh """
-                sudo apt-get install systemd
-                Y
-                sudo apt-get reinstall systemd
-                Y
-                mkdir /etc/docker
-                touch /etc/docker/daemon.json
-                echo "
-                {
-                  "insecure-registries" : ["docker.h2o.ai:8080"]
-                }" > /etc/docker/daemon.json
-                sudo systemctl restart docker
-                docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD https://docker.h2o.ai
-                docker run https://docker.h2o.ai/$DAI_IMAGE:$H2OAI_RUNTIME_DOCKER_TAG
+                wget $DAI_IMAGE -O dai
+                tar -xzf dai
+                docker run dai
+                """
+            }
+        }
+        stage('Collection') {
+            agent {
+              docker {
+                image 'python:2-alpine'
+              }
+            }
+            steps {
+                sh """
                 python collection.sh
                 """
             }
