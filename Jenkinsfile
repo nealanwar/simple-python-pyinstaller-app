@@ -21,8 +21,8 @@ pipeline {
             }
             steps {
                 sh """
-                echo "
                 touch /etc/docker/daemon.json
+                echo "
                 {
   "insecure-registries" : ["docker.h2o.ai:8080"]
 }" > /etc/docker/daemon.json
