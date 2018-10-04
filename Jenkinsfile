@@ -1,8 +1,8 @@
 pipeline {
     agent none
 
-    environment {
-          MESSAGE = 'print me'
+    parameters {
+      stringParam(name: 'MESSAGE', defaultValue: 'a message string')
     }
 
     stages {
