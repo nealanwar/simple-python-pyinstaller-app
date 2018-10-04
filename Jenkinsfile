@@ -21,8 +21,8 @@ pipeline {
             }
             steps {
                 sh """
-                docker --insecure-registry=docker.h2o.ai:8080 login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD docker.h2o.ai
-                docker run docker.h2o.ai/$DAI_IMAGE:$H2OAI_RUNTIME_DOCKER_TAG
+                docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD https://docker.h2o.ai
+                docker run https://docker.h2o.ai/$DAI_IMAGE:$H2OAI_RUNTIME_DOCKER_TAG
                 python collection.sh
                 """
             }
