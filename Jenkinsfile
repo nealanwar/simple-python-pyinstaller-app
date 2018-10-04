@@ -17,12 +17,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python collection.py' $SETTINGS $TRAIN $TEST
-            }
-            post {
-              success {
-                archiveArtifacts 'out.txt'
-              }
+                sh 'python collection.sh'
             }
         }
     }
