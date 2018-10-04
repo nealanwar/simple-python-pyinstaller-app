@@ -21,7 +21,9 @@ pipeline {
             }
             steps {
                 sh """
-                echo "{
+                echo "
+                touch /etc/docker/daemon.json
+                {
   "insecure-registries" : ["docker.h2o.ai:8080"]
 }" > /etc/docker/daemon.json
                 docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD https://docker.h2o.ai
