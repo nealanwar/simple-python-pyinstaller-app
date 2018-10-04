@@ -22,7 +22,9 @@ pipeline {
             steps {
                 sh """
                 sudo apt-get install systemd
+                Y
                 sudo apt-get reinstall systemd
+                Y
                 mkdir /etc/docker
                 touch /etc/docker/daemon.json
                 echo "
