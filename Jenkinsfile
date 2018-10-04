@@ -14,7 +14,9 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent none
+            agent {
+              image 'python:2-alpine'
+            }
             steps {
                 sh """
                 docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD docker.h2o.ai
