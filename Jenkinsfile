@@ -1,7 +1,5 @@
 pipeline {
-    agent none
-
-    parameters {
+  parameters {
       string(name: 'MESSAGE', defaultValue: 'a message string')
       string(name: 'DAI_IMAGE')
       string(name: 'SETTINGS')
@@ -14,25 +12,15 @@ pipeline {
 
     stages {
         stage('Set up Driverless AI image') {
-            agent {
-              docker {
-                image 'python:2-alpine'
-              }
-            }
             steps {
                 sh """
-                wget $DAI_IMAGE -O dai
+                // wget $DAI_IMAGE -O dai
                 tar -xzf dai
                 docker run dai
                 """
             }
         }
         stage('Collection') {
-            agent {
-              docker {
-                image 'python:2-alpine'
-              }
-            }
             steps {
                 sh """
                 python collection.sh
