@@ -3,18 +3,21 @@ pipeline {
 
     parameters {
       string(name: 'MESSAGE', defaultValue: 'a message string')
+      string(name: 'DAI_IMAGE')
+      string(name: 'SETTINGS')
+      string(name: 'TRAIN')
+      string(name: 'TEST')
     }
 
     stages {
         stage('Build') {
             agent {
                 docker {
-                    image 'python:2-alpine'
+                    image DAI_IMAGE
                 }
             }
             steps {
-                sh 'echo $MESSAGE'
-                sh 'echo $MESSAGE > out.txt'
+                sh 'python collection.py' $SETTINGS $TRAIN $TEST
             }
             post {
               success {
