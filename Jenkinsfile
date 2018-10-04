@@ -1,7 +1,11 @@
 pipeline {
     agent none
+
+    environment {
+          MESSAGE = 'print me'
+    }
+
     stages {
-        // build stage
         stage('Build') {
             agent {
                 docker {
@@ -9,40 +13,14 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                sh 'echo $MESSAGE'
+                sh 'echo $MESSAGE > out.txt'
+            }
+            post {
+              success {
+                archiveArtifacts 'out.txt'
+              }
             }
         }
-        // test stage
-        stage('Test') {
-                   agent {
-                       docker {
-                           image 'qnib/pytest'
-                       }
-                   }
-                   steps {
-                       sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-                   }
-                   post {
-                       always {
-                           junit 'test-reports/results.xml'
-                       }
-                   }
-               }
-      // deliver stage
-      stage('Deliver') {
-           agent {
-               docker {
-                   image 'cdrx/pyinstaller-linux:python2'
-               }
-           }
-           steps {
-               sh 'pyinstaller --onefile sources/add2vals.py'
-           }
-           post {
-               success {
-                   archiveArtifacts 'dist/add2vals'
-               }
-           }
-       }
     }
 }
