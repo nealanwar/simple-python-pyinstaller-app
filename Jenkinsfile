@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     parameters {
-      stringParam(name: 'MESSAGE', defaultValue: 'a message string')
+      string(name: 'MESSAGE', defaultValue: 'a message string')
     }
 
     stages {
