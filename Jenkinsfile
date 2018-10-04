@@ -15,8 +15,7 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-            steps {$REGISTRY_USERNAME -p $REGISTRY_PASSWORD docker.h2o.ai
-                docker pull docker.h2o.ai/$DAI_IMAGE:$H2OAI_RUNTIME_DOCKER_TAG
+            steps {
                 sh """
                 docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD docker.h2o.ai
                 docker pull docker.h2o.ai/$DAI_IMAGE:$H2OAI_RUNTIME_DOCKER_TAG
