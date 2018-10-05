@@ -24,6 +24,7 @@ pipeline {
                 sh """
                 cd /home/dai_rel_1.3.1
                 docker load < /home/${DAI_IMAGE}.tar.gz
+                docker images
                 docker run \
                   --pid=host \
                   --init \
