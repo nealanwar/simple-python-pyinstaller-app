@@ -4,7 +4,9 @@ pipeline {
   agent any
   parameters {
       string(name: 'MESSAGE', defaultValue: 'a message string')
+      string(name: 'DAI_DOWNLOAD')
       string(name: 'DAI_IMAGE')
+      string(name: 'VERSION')
       string(name: 'SETTINGS')
       string(name: 'TRAIN')
       string(name: 'TEST')
@@ -19,7 +21,7 @@ pipeline {
             // a GPU host to use (install nvidia-docker, tweak options, etc.)
             // are not included, they should be in the final Jenkinsfile
 
-            // docker load < /home/${DAI_IMAGE}-1.3.1-9.0.tar.gz
+            // docker load < /home/${DAI_DOWNLOAD}
             steps {
                 sh """
                 cd /home/dai_rel_1.3.1
@@ -35,7 +37,7 @@ pipeline {
                   -v `pwd`/log:/log \
                   -v `pwd`/license:/license \
                   -v `pwd`/tmp:/tmp \
-                  h2oai/${DAI_IMAGE}:1.3.1-9.0
+                  h2oai/${DAI_IMAGE}:${VERSION}
                 """
             }
         }
