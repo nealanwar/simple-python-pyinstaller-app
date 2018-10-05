@@ -23,7 +23,7 @@ pipeline {
             steps {
                 sh """
                 cd /home/dai_rel_1.3.1
-                docker load < /home/$DAI_IMAGE
+                docker load < /home/$DAI_IMAGE.tar.gz
                 docker run \
                   --pid=host \
                   --init \
