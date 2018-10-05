@@ -45,6 +45,7 @@ pipeline {
             // begin data collection on the Driverless AI image
             steps {
                 sh """
+                ls /usr/bin/python3.6
                 /usr/bin/python3.6 collection.py ${SETTINGS} ${TRAIN} ${TEST}
                 """
             }
