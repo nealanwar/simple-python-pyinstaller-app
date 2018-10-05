@@ -1,4 +1,5 @@
 pipeline {
+  agent any
   parameters {
       string(name: 'MESSAGE', defaultValue: 'a message string')
       string(name: 'DAI_IMAGE')
