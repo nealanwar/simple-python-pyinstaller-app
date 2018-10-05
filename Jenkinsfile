@@ -15,7 +15,8 @@ pipeline {
         stage('Set up Driverless AI image') {
             steps {
                 sh """
-                // wget $DAI_IMAGE -O dai
+                echo "hi"
+                wget $DAI_IMAGE -O dai
                 tar -xzf dai
                 docker run dai
                 """
