@@ -19,11 +19,10 @@ pipeline {
             // a GPU host to use (install nvidia-docker, tweak options, etc.)
             // are not included, they should be in the final Jenkinsfile
 
-            // docker load < /home/$DAI_IMAGE
+            // docker load < /home/${DAI_IMAGE}.tar.gz
             steps {
                 sh """
                 cd /home/dai_rel_1.3.1
-                docker load < /home/${DAI_IMAGE}.tar.gz
                 docker images
                 docker run \
                   --pid=host \
