@@ -1,4 +1,6 @@
 pipeline {
+  // agent "any" starts the pipeline on my local machine,
+  // with a local copy of the DAI image
   agent any
   parameters {
       string(name: 'MESSAGE', defaultValue: 'a message string')
@@ -15,7 +17,7 @@ pipeline {
         stage('Set up Driverless AI image') {
             steps {
                 sh """
-                ls /home/Downloads > out.txt
+                docker run /home/$DAI_IMAGE > out.txt
                 """
             }
             post {
