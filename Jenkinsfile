@@ -19,7 +19,7 @@ pipeline {
             // a GPU host to use (install nvidia-docker, tweak options, etc.)
             // are not included, they should be in the final Jenkinsfile
 
-            // docker load < /home/${DAI_IMAGE}.tar.gz
+            // docker load < /home/${DAI_IMAGE}-1.3.1-9.0.tar.gz
             steps {
                 sh """
                 cd /home/dai_rel_1.3.1
@@ -35,7 +35,7 @@ pipeline {
                   -v `pwd`/log:/log \
                   -v `pwd`/license:/license \
                   -v `pwd`/tmp:/tmp \
-                  h2oai/${DAI_IMAGE}:1.3.1-9.0
+                  h2oai/${DAI_IMAGE}
                 """
             }
         }
