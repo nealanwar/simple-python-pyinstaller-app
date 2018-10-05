@@ -22,6 +22,7 @@ pipeline {
             // docker load < /home/$DAI_IMAGE
             steps {
                 sh """
+                cd dai_rel_1.3.1
                 docker run \
                   --pid=host \
                   --init \
