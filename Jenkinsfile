@@ -37,7 +37,7 @@ pipeline {
                   -v `pwd`/log:/log \
                   -v `pwd`/license:/license \
                   -v `pwd`/tmp:/tmp \
-                  h2oai/${DAI_IMAGE}:${VERSION}
+                  h2oai/${DAI_IMAGE}:${VERSION} &
                 """
             }
         }
