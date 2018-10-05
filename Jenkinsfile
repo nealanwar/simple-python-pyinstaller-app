@@ -18,9 +18,10 @@ pipeline {
             // for the sake of testing on a CPU all the steps to prepare
             // a GPU host to use (install nvidia-docker, tweak options, etc.)
             // are not included, they should be in the final Jenkinsfile
+
+            // docker load < /home/$DAI_IMAGE
             steps {
                 sh """
-                docker load < /home/$DAI_IMAGE
                 docker run \
                   --pid=host \
                   --init \
