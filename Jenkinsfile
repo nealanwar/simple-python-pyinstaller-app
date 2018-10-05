@@ -46,6 +46,7 @@ pipeline {
             steps {
                 sh """
                 ls /usr/bin/
+                apt-get install python3
                 /usr/bin/python3.6 collection.py ${SETTINGS} ${TRAIN} ${TEST}
                 """
             }
