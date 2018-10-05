@@ -15,18 +15,29 @@ pipeline {
 
     stages {
         stage('Set up Driverless AI image') {
+            // for the sake of testing on a CPU all the steps to prepare
+            // a GPU host to use (install nvidia-docker, tweak options, etc.)
+            // are not included, they should be in the final Jenkinsfile
             steps {
                 sh """
-                docker run /home/$DAI_IMAGE > out.txt
+                docker load < /home/$DAI_IMAGE
+                docker run \
+                  --pid=host \
+                  --init \
+                  --rm \
+                  --shm-size=256m \
+                  -u `id -u`:`id -g` \
+                  -p 12345:12345 \
+                  -v `pwd`/data:/data \
+                  -v `pwd`/log:/log \
+                  -v `pwd`/license:/license \
+                  -v `pwd`/tmp:/tmp \
+                  h2oai/$DAI_IMAGE
                 """
-            }
-            post {
-                success {
-                    archiveArtifacts 'out.txt'
-                }
             }
         }
         stage('Collection') {
+            // begin data collection on the Driverless AI image
             steps {
                 sh """
                 python collection.sh
