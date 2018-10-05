@@ -23,7 +23,7 @@ pipeline {
             steps {
                 sh """
                 cd /home/dai_rel_1.3.1
-                docker load < /home/$DAI_IMAGE.tar.gz
+                docker load < /home/${DAI_IMAGE}.tar.gz
                 docker run \
                   --pid=host \
                   --init \
@@ -35,7 +35,7 @@ pipeline {
                   -v `pwd`/log:/log \
                   -v `pwd`/license:/license \
                   -v `pwd`/tmp:/tmp \
-                  h2oai/$DAI_IMAGE
+                  h2oai/${DAI_IMAGE}
                 """
             }
         }
