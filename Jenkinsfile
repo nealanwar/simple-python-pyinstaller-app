@@ -15,7 +15,7 @@ pipeline {
         stage('Set up Driverless AI image') {
             steps {
                 sh """
-                ls /home/ > out.txt
+                ls /home/Downloads > out.txt
                 """
             }
             post {
