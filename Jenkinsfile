@@ -15,11 +15,13 @@ pipeline {
         stage('Set up Driverless AI image') {
             steps {
                 sh """
-                echo "hi"
-                wget $DAI_IMAGE -O dai
-                tar -xzf dai
-                docker run dai
+                ls > out.txt
                 """
+            }
+            post {
+                success {
+                    archiveArtifacts 'out.txt'
+                }
             }
         }
         stage('Collection') {
