@@ -45,7 +45,7 @@ pipeline {
             // begin data collection on the Driverless AI image
             steps {
                 sh """
-                python collection.sh
+                ./collection.sh
                 """
             }
         }
