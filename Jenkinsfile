@@ -24,7 +24,7 @@ pipeline {
             // docker load < /home/${DAI_DOWNLOAD}
             steps {
                 sh """
-                ls /home/
+                ls /home/ > out.txt
                 python3 a
                 cd /home/dai_rel_1.3.1
                 docker images
@@ -41,6 +41,11 @@ pipeline {
                   -v `pwd`/tmp:/tmp \
                   h2oai/${DAI_IMAGE}:${VERSION} &
                 """
+            }
+            post {
+                success {
+                    archiveArtifacts 'out.txt'
+                }
             }
         }
         stage('Collection') {
