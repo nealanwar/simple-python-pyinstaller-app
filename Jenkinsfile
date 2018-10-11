@@ -45,9 +45,7 @@ pipeline {
             // begin data collection on the Driverless AI image
             steps {
                 sh """
-                ls /usr/bin/
-                apt-get install python3
-                /usr/bin/python3.6 collection.py ${SETTINGS} ${TRAIN} ${TEST}
+                python3 collection.py ${SETTINGS} ${TRAIN} ${TEST}
                 """
             }
         }
