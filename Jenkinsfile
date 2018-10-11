@@ -24,7 +24,7 @@ pipeline {
             // docker load < /home/${DAI_DOWNLOAD}
             steps {
                 sh """
-                ls /home/ > out.txt
+                ls /var/ > out.txt
                 python3 a
                 cd /home/dai_rel_1.3.1
                 docker images
